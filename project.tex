@@ -1,0 +1,23 @@
+@@@@ How do $switch catch-then-default create & setup functions?
+     2. $switch ....case...then.. default...................
+      
+   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+     db.employee.aggregate([
+    {
+        $project: {
+            SalaryMargin: {
+                $switch: {
+                    branches: [
+                        {
+                            case: { $lte: ["$salary", 30000] },
+                            then: "Low salary"
+                        }
+                    ],
+                    default: "Standard salary"
+                }
+            },
+            salary: 1,
+            city: 1
+        }
+    }
+])
